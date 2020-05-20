@@ -8,7 +8,7 @@ A turn-key solution for integrating Quilt client-side libraries into your Rails 
   - [Quick start](#quick-start)
     - [Generate Rails boilerplate](#generate-rails-boilerplate)
     - [Add Ruby dependencies](#add-ruby-dependencies)
-    - [Generate Quilt boilerplate](#generate-quilt-boilerplate)
+    - [Generate app boilerplate](#generate-app-boilerplate)
     - [Try it out](#try-it-out)
   - [Manual Install](#manual-installation)
     - [Generate Rails boilerplate](#generate-rails-boilerplate)
@@ -38,6 +38,8 @@ A turn-key solution for integrating Quilt client-side libraries into your Rails 
 
 ## Server-side-rendering
 
+🗒 The quick start guide is for Shopify internal only assuming the use of [`sewing-kit`](https://github.com/Shopify/sewing-kit) and [`dev`](https://github.com/Shopify/dev)
+
 ### Quick start
 
 Using the magic of generators, we can spin up a basic app with a few console commands.
@@ -54,11 +56,11 @@ When prompted, choose `rails`. This will generate a basic Rails application scaf
 
 This will install our ruby dependencies and update the project's gemfile.
 
-#### Generate Quilt boilerplate
+#### Generate app boilerplate
 
-`rails generate quilt:install`
+`rails generate quilt_rails:install`
 
-This will install the Node dependencies, provide a basic React app (in TypeScript) and mounts the Quilt engine inside of `config/routes.rb`.
+This will install the Node dependencies, provide a basic React app (in TypeScript) and mounts the Quilt engine inside of `config/routes.rb` along with basic linting and format configurations.
 
 #### Try it out
 
@@ -90,6 +92,9 @@ yarn add react react-dom
 # Add Typescript
 yarn add typescript @types/react @types/react-dom
 ```
+
+🗒️ Ignore `sewing_kit` and `@shopify/sewing-kit` dependencies if you don't have access to it.
+Instead, make sure to use [`react-server-webpack-plugin`](../../packages/react-server-webpack-plugin/README.md) with your webpack configuration.
 
 ##### Define typescript config
 
@@ -829,10 +834,28 @@ The `Performance::Reportable` mixin uses [https://github.com/Shopify/statsd-inst
 
 ### Generators
 
-#### `quilt:install`
+#### `quilt_rails:install`
 
-Installs the Node dependencies, provide a basic React app (in TypeScript) and mounts the Quilt engine in `config/routes.rb`.
+Run both generator below.
 
-#### `sewing_kit:install`
+##### `quilt_rails:sewing_kit:install`
 
-Adds a basic `sewing-kit.config.ts` file.
+Adds a basic `sewing-kit.config.ts` file and basic linting, format configuration.
+This generator assume the use of [`sewing-kit`](https://github.com/Shopify/sewing-kit)
+
+##### `quilt_rails:quilt:install`
+
+Run all the generator below.
+
+###### `quilt_rails:quilt:rails_setup`
+
+Mounts the Quilt engine in `config/routes.rb` and provide a Procfile to kick start node in production container.
+
+###### `quilt_rails:quilt:react_setup`
+
+Installs the Node dependencies necessary for a react application.
+This generator assume the use of [`sewing-kit`](https://github.com/Shopify/sewing-kit)
+
+###### `quilt_rails:quilt:react_app`
+
+This generator provide a basic React app (in TypeScript).

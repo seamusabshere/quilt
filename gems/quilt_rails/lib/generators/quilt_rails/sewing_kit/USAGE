@@ -2,4 +2,4 @@ Description:
     This generator creates a sewing-kit config file.
 
 Example:
-    rails generate sewing-kit:install
+    rails generate quilt_rails:sewing_kit:install
